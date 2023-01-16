@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+
+  cart_service:
+    build: .
+    ports:
+      - "8003:8000"
+
+  cart_mongodb:
+    container_name: mob-mongo
+    image: mongo:4.4.6
+    volumes:
+      - ./apps/mongo:/data/db
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+
+networks:
+  network:
+    name: microservices
+    external: true
