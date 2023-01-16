@@ -7,6 +7,9 @@ COPY . /code
 
 WORKDIR /code
 
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN apk update  \
+    && pip3 install --upgrade pip \
+    && apk add gcc \
+    && pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
